@@ -1,9 +1,10 @@
 package kodlamaio.hrmsProject.business.concretes;
 
 import kodlamaio.hrmsProject.business.abstracts.JobPositionService;
+import kodlamaio.hrmsProject.business.businessRules.JobPositonBusinessRules;
 import kodlamaio.hrmsProject.business.requests.CreateJobPosition;
 import kodlamaio.hrmsProject.business.responses.GetAllJobPositionsResponse;
-import kodlamaio.hrmsProject.business.rules.JobPositonRules;
+import kodlamaio.hrmsProject.core.utilities.businessRules.BusinessRules;
 import kodlamaio.hrmsProject.core.utilities.mappers.ModelMapperService;
 import kodlamaio.hrmsProject.core.utilities.results.*;
 import kodlamaio.hrmsProject.dataAccess.abstracts.JobPositionDao;
@@ -19,7 +20,7 @@ public class JobPositionManager implements JobPositionService {
 
     private JobPositionDao jobPositionDao;
     private ModelMapperService modelMapperService;
-    private JobPositonRules jobPositonRules;
+    private JobPositonBusinessRules jobPositonBusinessRules;
 
 
     @Override
@@ -35,10 +36,10 @@ public class JobPositionManager implements JobPositionService {
     }
 
     public Result add(CreateJobPosition createJobPosition) {
+        var businessResult = BusinessRules.Run(jobPositonBusinessRules.doesJobPositionNameExist(createJobPosition.getJobPositionName()));
 
-        if (jobPositonRules.doesJobPositionNameExist(createJobPosition.getPositionName())) {
-            return new ErrorResult("Job position name already exists.");
-        }
+        if (businessResult != null)
+            return businessResult;
 
         JobPosition jobPosition =
                 modelMapperService.forRequest().map(createJobPosition, JobPosition.class);

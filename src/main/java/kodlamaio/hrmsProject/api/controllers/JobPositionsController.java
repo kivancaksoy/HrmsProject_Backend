@@ -1,5 +1,6 @@
 package kodlamaio.hrmsProject.api.controllers;
 
+import jakarta.validation.Valid;
 import kodlamaio.hrmsProject.business.abstracts.JobPositionService;
 import kodlamaio.hrmsProject.business.requests.CreateJobPosition;
 import kodlamaio.hrmsProject.business.responses.GetAllJobPositionsResponse;
@@ -23,7 +24,7 @@ public class JobPositionsController {
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody CreateJobPosition createJobPosition){
+    public Result add(@RequestBody @Valid CreateJobPosition createJobPosition){
         Result result = jobPositionService.add(createJobPosition);
         return result;
     }
