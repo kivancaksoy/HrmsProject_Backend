@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetAllEmployers {
+public class GetAllEmployersResponse {
     private int employerId;
     private String email;
     private String companyName;

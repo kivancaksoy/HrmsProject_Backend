@@ -1,6 +1,5 @@
 package kodlamaio.hrmsProject.business.requests;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -13,7 +12,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateJobSeeker {
+public class CreateJobSeekerRequest {
 
     @NotNull
     @NotBlank

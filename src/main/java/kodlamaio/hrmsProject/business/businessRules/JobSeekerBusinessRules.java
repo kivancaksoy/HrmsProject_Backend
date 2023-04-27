@@ -1,6 +1,6 @@
 package kodlamaio.hrmsProject.business.businessRules;
 
-import kodlamaio.hrmsProject.business.requests.CreateJobSeeker;
+import kodlamaio.hrmsProject.business.requests.CreateJobSeekerRequest;
 import kodlamaio.hrmsProject.business.validations.emailVerification.EmailVerificationService;
 import kodlamaio.hrmsProject.business.validations.mernisValidation.MernisValidationService;
 import kodlamaio.hrmsProject.core.utilities.results.ErrorResult;
@@ -27,8 +27,8 @@ public class JobSeekerBusinessRules {
         return new ErrorResult("Email is not verified!");
     }
 
-    public Result isPersonVerified (CreateJobSeeker createJobSeeker){
-        boolean isVerified = mernisValidationService.checkIfRealPerson(createJobSeeker);
+    public Result isPersonVerified (CreateJobSeekerRequest createJobSeekerRequest){
+        boolean isVerified = mernisValidationService.checkIfRealPerson(createJobSeekerRequest);
 
         if (isVerified)
             return new SuccessResult();

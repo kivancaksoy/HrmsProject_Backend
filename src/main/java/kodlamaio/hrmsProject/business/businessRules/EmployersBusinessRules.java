@@ -1,6 +1,6 @@
 package kodlamaio.hrmsProject.business.businessRules;
 
-import kodlamaio.hrmsProject.business.requests.CreateEmployer;
+import kodlamaio.hrmsProject.business.requests.CreateEmployerRequest;
 import kodlamaio.hrmsProject.business.validations.emailVerification.EmailVerificationService;
 import kodlamaio.hrmsProject.core.utilities.results.ErrorResult;
 import kodlamaio.hrmsProject.core.utilities.results.Result;
@@ -18,12 +18,12 @@ public class EmployersBusinessRules {
     private UserDao userDao;
     private EmailVerificationService emailVerificationService;
 
-    public Result isEmailAndWebSiteOnTheSameDomain(CreateEmployer createEmployer) {
-        int getWebSiteDomainStartingIndex = createEmployer.getWebSite().indexOf(".") + 1;
-        String getWebSiteDomain = createEmployer.getWebSite().substring(getWebSiteDomainStartingIndex);
+    public Result isEmailAndWebSiteOnTheSameDomain(CreateEmployerRequest createEmployerRequest) {
+        int getWebSiteDomainStartingIndex = createEmployerRequest.getWebSite().indexOf(".") + 1;
+        String getWebSiteDomain = createEmployerRequest.getWebSite().substring(getWebSiteDomainStartingIndex);
 
-        int getEmailDomainStartingIndex = createEmployer.getEmail().indexOf("@") + 1;
-        String getEmailDomain = createEmployer.getEmail().substring(getEmailDomainStartingIndex);
+        int getEmailDomainStartingIndex = createEmployerRequest.getEmail().indexOf("@") + 1;
+        String getEmailDomain = createEmployerRequest.getEmail().substring(getEmailDomainStartingIndex);
 
         if (getWebSiteDomain.equals(getEmailDomain))
             return new SuccessResult();

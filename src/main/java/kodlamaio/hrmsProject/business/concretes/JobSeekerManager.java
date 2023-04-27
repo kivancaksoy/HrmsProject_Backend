@@ -2,8 +2,8 @@ package kodlamaio.hrmsProject.business.concretes;
 
 import kodlamaio.hrmsProject.business.abstracts.JobSeekerService;
 import kodlamaio.hrmsProject.business.businessRules.JobSeekerBusinessRules;
-import kodlamaio.hrmsProject.business.requests.CreateJobSeeker;
-import kodlamaio.hrmsProject.business.responses.GetAllJobSeekers;
+import kodlamaio.hrmsProject.business.requests.CreateJobSeekerRequest;
+import kodlamaio.hrmsProject.business.responses.GetAllJobSeekersResponse;
 import kodlamaio.hrmsProject.core.utilities.businessRules.BusinessRules;
 import kodlamaio.hrmsProject.core.utilities.mappers.ModelMapperService;
 import kodlamaio.hrmsProject.core.utilities.results.DataResult;
@@ -29,17 +29,17 @@ public class JobSeekerManager implements JobSeekerService {
     private JobSeekerBusinessRules jobSeekerBusinessRules;
 
     @Override
-    public Result add(CreateJobSeeker createJobSeeker) {
-        var businessResult = BusinessRules.Run(jobSeekerBusinessRules.emailCanNotBeDublicated(createJobSeeker.getEmail()),
-                jobSeekerBusinessRules.tcknCanNotBeDublicated(createJobSeeker.getTckn()),
-                jobSeekerBusinessRules.isEmailVerified(createJobSeeker.getEmail()),
-                jobSeekerBusinessRules.isPersonVerified(createJobSeeker));
+    public Result add(CreateJobSeekerRequest createJobSeekerRequest) {
+        var businessResult = BusinessRules.Run(jobSeekerBusinessRules.emailCanNotBeDublicated(createJobSeekerRequest.getEmail()),
+                jobSeekerBusinessRules.tcknCanNotBeDublicated(createJobSeekerRequest.getTckn()),
+                jobSeekerBusinessRules.isEmailVerified(createJobSeekerRequest.getEmail()),
+                jobSeekerBusinessRules.isPersonVerified(createJobSeekerRequest));
 
         if (businessResult != null)
             return businessResult;
 
-        User user = modelMapperService.forRequest().map(createJobSeeker, User.class);
-        JobSeeker jobseeker = modelMapperService.forRequest().map(createJobSeeker, JobSeeker.class);
+        User user = modelMapperService.forRequest().map(createJobSeekerRequest, User.class);
+        JobSeeker jobseeker = modelMapperService.forRequest().map(createJobSeekerRequest, JobSeeker.class);
 
         User createdUser = userDao.save(user);
         jobseeker.setJobSeekerId(createdUser.getId());
@@ -49,13 +49,13 @@ public class JobSeekerManager implements JobSeekerService {
     }
 
     @Override
-    public DataResult<List<GetAllJobSeekers>> getAll() {
+    public DataResult<List<GetAllJobSeekersResponse>> getAll() {
         List<JobSeeker> jobSeekers = jobSeekerDao.findAll();
 
-        List<GetAllJobSeekers> getAllJobSeekers =
+        List<GetAllJobSeekersResponse> getAllJobSeekerResponses =
                 jobSeekers.stream().map(jobSeeker ->
                         modelMapperService.forResponse()
-                                .map(jobSeeker, GetAllJobSeekers.class)).toList();
-        return new SuccessDataResult<>(getAllJobSeekers, "Job seekers listed.");
+                                .map(jobSeeker, GetAllJobSeekersResponse.class)).toList();
+        return new SuccessDataResult<>(getAllJobSeekerResponses, "Job seekers listed.");
     }
 }

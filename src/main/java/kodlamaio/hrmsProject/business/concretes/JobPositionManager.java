@@ -2,7 +2,7 @@ package kodlamaio.hrmsProject.business.concretes;
 
 import kodlamaio.hrmsProject.business.abstracts.JobPositionService;
 import kodlamaio.hrmsProject.business.businessRules.JobPositonBusinessRules;
-import kodlamaio.hrmsProject.business.requests.CreateJobPosition;
+import kodlamaio.hrmsProject.business.requests.CreateJobPositionRequest;
 import kodlamaio.hrmsProject.business.responses.GetAllJobPositionsResponse;
 import kodlamaio.hrmsProject.core.utilities.businessRules.BusinessRules;
 import kodlamaio.hrmsProject.core.utilities.mappers.ModelMapperService;
@@ -35,14 +35,14 @@ public class JobPositionManager implements JobPositionService {
         return new SuccessDataResult<List<GetAllJobPositionsResponse>>(getAllJobPositionsResponses, "Job positions listed.");
     }
 
-    public Result add(CreateJobPosition createJobPosition) {
-        var businessResult = BusinessRules.Run(jobPositonBusinessRules.doesJobPositionNameExist(createJobPosition.getJobPositionName()));
+    public Result add(CreateJobPositionRequest createJobPositionRequest) {
+        var businessResult = BusinessRules.Run(jobPositonBusinessRules.doesJobPositionNameExist(createJobPositionRequest.getJobPositionName()));
 
         if (businessResult != null)
             return businessResult;
 
         JobPosition jobPosition =
-                modelMapperService.forRequest().map(createJobPosition, JobPosition.class);
+                modelMapperService.forRequest().map(createJobPositionRequest, JobPosition.class);
         jobPositionDao.save(jobPosition);
         return new SuccessResult("Job position added.");
     }

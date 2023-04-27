@@ -1,7 +1,7 @@
 package kodlamaio.hrmsProject.business.validations.mernisValidation;
 
-import kodlamaio.hrmsProject.business.requests.CreateJobSeeker;
+import kodlamaio.hrmsProject.business.requests.CreateJobSeekerRequest;
 
 public interface MernisValidationService {
-    boolean checkIfRealPerson(CreateJobSeeker createJobSeeker);
+    boolean checkIfRealPerson(CreateJobSeekerRequest createJobSeekerRequest);
 }

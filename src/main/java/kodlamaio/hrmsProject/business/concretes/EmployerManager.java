@@ -2,8 +2,8 @@ package kodlamaio.hrmsProject.business.concretes;
 
 import kodlamaio.hrmsProject.business.abstracts.EmployerService;
 import kodlamaio.hrmsProject.business.businessRules.EmployersBusinessRules;
-import kodlamaio.hrmsProject.business.requests.CreateEmployer;
-import kodlamaio.hrmsProject.business.responses.GetAllEmployers;
+import kodlamaio.hrmsProject.business.requests.CreateEmployerRequest;
+import kodlamaio.hrmsProject.business.responses.GetAllEmployersResponse;
 import kodlamaio.hrmsProject.core.utilities.businessRules.BusinessRules;
 import kodlamaio.hrmsProject.core.utilities.mappers.ModelMapperService;
 import kodlamaio.hrmsProject.core.utilities.results.DataResult;
@@ -29,17 +29,17 @@ public class EmployerManager implements EmployerService {
     private EmployersBusinessRules employersBusinessRules;
 
     @Override
-    public Result add(CreateEmployer createEmployer) {
+    public Result add(CreateEmployerRequest createEmployerRequest) {
 
-        var businessResult = BusinessRules.Run(employersBusinessRules.isEmailAndWebSiteOnTheSameDomain(createEmployer),
-                employersBusinessRules.emailCanNotBeDublicated(createEmployer.getEmail()),
-                employersBusinessRules.isEmailVerified(createEmployer.getEmail()));
+        var businessResult = BusinessRules.Run(employersBusinessRules.isEmailAndWebSiteOnTheSameDomain(createEmployerRequest),
+                employersBusinessRules.emailCanNotBeDublicated(createEmployerRequest.getEmail()),
+                employersBusinessRules.isEmailVerified(createEmployerRequest.getEmail()));
 
         if (businessResult != null)
             return businessResult;
 
-        User user = modelMapperService.forRequest().map(createEmployer, User.class);
-        Employer employer = modelMapperService.forRequest().map(createEmployer, Employer.class);
+        User user = modelMapperService.forRequest().map(createEmployerRequest, User.class);
+        Employer employer = modelMapperService.forRequest().map(createEmployerRequest, Employer.class);
 
         User createdUser = userDao.save(user);
         employer.setEmployerId(createdUser.getId());
@@ -49,14 +49,14 @@ public class EmployerManager implements EmployerService {
     }
 
     @Override
-    public DataResult<List<GetAllEmployers>> getAll() {
+    public DataResult<List<GetAllEmployersResponse>> getAll() {
         List<Employer> employers = employerDao.findAll();
 
-        List<GetAllEmployers> getAllEmployers =
+        List<GetAllEmployersResponse> getAllEmployersResponses =
                 employers.stream().map(employer ->
                         modelMapperService.forResponse()
-                                .map(employer, GetAllEmployers.class)).toList();
-        return new SuccessDataResult<>(getAllEmployers, "Employers listed.");
+                                .map(employer, GetAllEmployersResponse.class)).toList();
+        return new SuccessDataResult<>(getAllEmployersResponses, "Employers listed.");
 
     }
 }
