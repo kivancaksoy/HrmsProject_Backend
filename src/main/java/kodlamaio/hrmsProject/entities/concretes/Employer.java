@@ -13,8 +13,9 @@ import lombok.NoArgsConstructor;
 public class Employer {
 
     @Id
-    @Column(name = "employer_id")
-    private int employerId;
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Column(name = "company_name")
     private String companyName;
@@ -25,7 +26,7 @@ public class Employer {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employer_id", referencedColumnName = "id")
     private User user;
 

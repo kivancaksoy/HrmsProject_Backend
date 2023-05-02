@@ -10,6 +10,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetAllJobSeekersResponse {
+    private int id;
     private int jobSeekerId;
     private String email;
     private String firstName;

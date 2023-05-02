@@ -15,8 +15,9 @@ import java.util.Date;
 public class JobSeeker {
 
     @Id
-    @Column(name = "job_seeker_id")
-    private int jobSeekerId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -30,7 +31,7 @@ public class JobSeeker {
     @Column(name = "birth_date")
     private Date birthDate;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_seeker_id", referencedColumnName = "id")
     private User user;
 }

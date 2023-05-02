@@ -1,5 +1,6 @@
 package kodlamaio.hrmsProject.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "employers"})
 public class User {
 
     @Id
@@ -22,5 +24,4 @@ public class User {
 
     @Column(name = "password")
     private String password;
-
 }

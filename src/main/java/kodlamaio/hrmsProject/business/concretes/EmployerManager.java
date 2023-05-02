@@ -6,10 +6,7 @@ import kodlamaio.hrmsProject.business.requests.CreateEmployerRequest;
 import kodlamaio.hrmsProject.business.responses.GetAllEmployersResponse;
 import kodlamaio.hrmsProject.core.utilities.businessRules.BusinessRules;
 import kodlamaio.hrmsProject.core.utilities.mappers.ModelMapperService;
-import kodlamaio.hrmsProject.core.utilities.results.DataResult;
-import kodlamaio.hrmsProject.core.utilities.results.Result;
-import kodlamaio.hrmsProject.core.utilities.results.SuccessDataResult;
-import kodlamaio.hrmsProject.core.utilities.results.SuccessResult;
+import kodlamaio.hrmsProject.core.utilities.results.*;
 import kodlamaio.hrmsProject.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrmsProject.dataAccess.abstracts.UserDao;
 import kodlamaio.hrmsProject.entities.concretes.Employer;
@@ -41,9 +38,13 @@ public class EmployerManager implements EmployerService {
         User user = modelMapperService.forRequest().map(createEmployerRequest, User.class);
         Employer employer = modelMapperService.forRequest().map(createEmployerRequest, Employer.class);
 
-        User createdUser = userDao.save(user);
-        employer.setEmployerId(createdUser.getId());
-        employerDao.save(employer);
+        try {
+            User createdUser = userDao.save(user);
+            employer.setUser(createdUser);
+            employerDao.save(employer);
+        } catch (Exception e) {
+            return new ErrorResult(e.getMessage());
+        }
 
         return new SuccessResult("Employer created.");
     }

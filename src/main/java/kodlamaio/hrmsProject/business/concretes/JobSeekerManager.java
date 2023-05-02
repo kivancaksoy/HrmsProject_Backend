@@ -42,7 +42,7 @@ public class JobSeekerManager implements JobSeekerService {
         JobSeeker jobseeker = modelMapperService.forRequest().map(createJobSeekerRequest, JobSeeker.class);
 
         User createdUser = userDao.save(user);
-        jobseeker.setJobSeekerId(createdUser.getId());
+        jobseeker.setUser(createdUser);
         jobSeekerDao.save(jobseeker);
 
         return new SuccessResult("Job seeker created.");
