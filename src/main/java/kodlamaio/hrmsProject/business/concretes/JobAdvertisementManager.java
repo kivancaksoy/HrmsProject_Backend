@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -36,21 +37,56 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 
         List<GetAllJobAdvertisementsResponse> getAllJobAdvertisementsResponses =
                 jobAdvertisements.stream().map(jobAdvertisement ->
-                                modelMapperService.forResponse()
-                                        .map(jobAdvertisement, GetAllJobAdvertisementsResponse.class))
-                        .toList();
+                        modelMapperService.forResponse()
+                                .map(jobAdvertisement, GetAllJobAdvertisementsResponse.class)).toList();
+
         return new SuccessDataResult<List<GetAllJobAdvertisementsResponse>>(getAllJobAdvertisementsResponses, "Job advertisements listed.");
     }
 
     @Override
-    public DataResult<List<GetAllJobAdvertisementsResponse>> getAllIsActive() {
-        List<JobAdvertisement> jobAdvertisements = jobAdvertisementDao.findByIsActiveTrue();
+    public DataResult<List<GetAllJobAdvertisementsResponse>> getAllActiveJobAdvertisements() {
+        List<JobAdvertisement> jobAdvertisements = jobAdvertisementDao.findByStatusTrue();
 
         List<GetAllJobAdvertisementsResponse> getAllJobAdvertisementsResponses =
                 jobAdvertisements.stream().map(jobAdvertisement ->
-                                modelMapperService.forResponse()
-                                        .map(jobAdvertisement, GetAllJobAdvertisementsResponse.class))
-                        .toList();
+                        modelMapperService.forResponse()
+                                .map(jobAdvertisement, GetAllJobAdvertisementsResponse.class)).toList();
+
         return new SuccessDataResult<List<GetAllJobAdvertisementsResponse>>(getAllJobAdvertisementsResponses, "Active Job advertisements listed.");
+    }
+
+    @Override
+    public DataResult<List<GetAllJobAdvertisementsResponse>> getAllActiveJobAdvertisementsSortedByJobPostingDate() {
+        List<JobAdvertisement> jobAdvertisements = jobAdvertisementDao.findByStatusTrueOrderByJobPostingDate();
+
+        List<GetAllJobAdvertisementsResponse> getAllJobAdvertisementsResponses =
+                jobAdvertisements.stream().map(jobAdvertisement ->
+                        modelMapperService.forResponse()
+                                .map(jobAdvertisement, GetAllJobAdvertisementsResponse.class)).toList();
+
+        return new SuccessDataResult<List<GetAllJobAdvertisementsResponse>>(getAllJobAdvertisementsResponses, "Active Job advertisements listed and sorted by job posting date.");
+    }
+
+    @Override
+    public DataResult<List<GetAllJobAdvertisementsResponse>> getAllActiveJobAdvertisementsAndCompanyNameIs(String companyName) {
+        List<JobAdvertisement> jobAdvertisements = jobAdvertisementDao.findByStatusTrueAndCompanyCompanyNameIs(companyName);
+
+        List<GetAllJobAdvertisementsResponse> getAllJobAdvertisementsResponses =
+                jobAdvertisements.stream().map(jobAdvertisement ->
+                        modelMapperService.forResponse()
+                                .map(jobAdvertisement, GetAllJobAdvertisementsResponse.class)).toList();
+
+        return new SuccessDataResult<List<GetAllJobAdvertisementsResponse>>(getAllJobAdvertisementsResponses, "Active Job advertisements listed for " + companyName);
+    }
+
+    @Override
+    public Result setJobAdvertisementStatusFalse(int jobAdvertisementId) {
+        JobAdvertisement jobAdvertisement = jobAdvertisementDao.findById(jobAdvertisementId)
+                .orElseThrow(() -> new IllegalArgumentException("Job advertisement not found with jobAdvertisementId: " + jobAdvertisementId));
+
+        jobAdvertisement.setStatus(false);
+        jobAdvertisementDao.save(jobAdvertisement);
+
+        return new SuccessResult("Job advertisement status has been set to false.");
     }
 }

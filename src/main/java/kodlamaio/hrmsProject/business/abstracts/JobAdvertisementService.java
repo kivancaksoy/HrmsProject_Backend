@@ -10,5 +10,8 @@ import java.util.List;
 public interface JobAdvertisementService {
     Result add(CreateJobAdvertisementRequest createJobAdvertisementRequest);
     DataResult<List<GetAllJobAdvertisementsResponse>> getAll();
-    DataResult<List<GetAllJobAdvertisementsResponse>> getAllIsActive();
+    DataResult<List<GetAllJobAdvertisementsResponse>> getAllActiveJobAdvertisements();
+    DataResult<List<GetAllJobAdvertisementsResponse>> getAllActiveJobAdvertisementsSortedByJobPostingDate();
+    DataResult<List<GetAllJobAdvertisementsResponse>> getAllActiveJobAdvertisementsAndCompanyNameIs(String companyName);
+    Result setJobAdvertisementStatusFalse (int jobAdvertisementId);
 }

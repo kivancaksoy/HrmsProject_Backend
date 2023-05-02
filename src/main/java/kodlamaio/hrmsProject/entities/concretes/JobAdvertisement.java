@@ -37,8 +37,8 @@ public class JobAdvertisement {
     @Column(name = "job_posting_date")
     private Date jobPostingDate;
 
-    @Column(name = "is_active")
-    private boolean isActive;
+    @Column(name = "status")
+    private boolean status;
 
     @ManyToOne()
     @JoinColumn(name = "job_position_id")

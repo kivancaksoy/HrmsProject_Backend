@@ -12,23 +12,38 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/jobadvertisements")
+@RequestMapping("/api/jobAdvertisements")
 @AllArgsConstructor
 public class JobAdvertisementsController {
     private JobAdvertisementService jobAdvertisementService;
 
-    @GetMapping("/getall")
+    @GetMapping("/getAll")
     public DataResult<List<GetAllJobAdvertisementsResponse>> getAll(){
         return jobAdvertisementService.getAll();
     }
 
-    @GetMapping("/getallisactive")
-    public DataResult<List<GetAllJobAdvertisementsResponse>> getAllIsActive(){
-        return jobAdvertisementService.getAllIsActive();
+    @GetMapping("/getAllActive")
+    public DataResult<List<GetAllJobAdvertisementsResponse>> getAllActive(){
+        return jobAdvertisementService.getAllActiveJobAdvertisements();
+    }
+
+    @GetMapping("/getAllActiveJobAdvertisementsSortedByJobPostingDate")
+    public DataResult<List<GetAllJobAdvertisementsResponse>> getAllActiveSortedByJobPostingDate(){
+        return jobAdvertisementService.getAllActiveJobAdvertisementsSortedByJobPostingDate();
+    }
+
+    @GetMapping("/getAllActiveJobAdvertisementsAndCompanyNameIs")
+    public DataResult<List<GetAllJobAdvertisementsResponse>> getAllActiveAndCompanyNameIs(String companyName){
+        return jobAdvertisementService.getAllActiveJobAdvertisementsAndCompanyNameIs(companyName);
     }
 
     @PostMapping("/add")
     public Result add(@RequestBody @Valid CreateJobAdvertisementRequest createJobAdvertisementRequest) {
         return jobAdvertisementService.add(createJobAdvertisementRequest);
+    }
+
+    @PutMapping("/setJobAdvertisementStatusFalse/{jobAdvertisementId}")
+    public Result setJobAdvertisementStatusFalse(@PathVariable int jobAdvertisementId){
+        return jobAdvertisementService.setJobAdvertisementStatusFalse(jobAdvertisementId);
     }
 }
