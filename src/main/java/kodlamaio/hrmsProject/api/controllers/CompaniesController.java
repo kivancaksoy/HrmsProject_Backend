@@ -18,7 +18,7 @@ public class CompaniesController {
 
     private CompanyService companyService;
 
-    @GetMapping("/getall")
+    @GetMapping("/getAll")
     public DataResult<List<GetAllCompaniesResponse>> getAll(){
         return companyService.getAll();
     }

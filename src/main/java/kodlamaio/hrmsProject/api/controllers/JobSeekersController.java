@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/jobseekers")
+@RequestMapping("/api/jobSeekers")
 @AllArgsConstructor
 public class JobSeekersController {
 
     private JobSeekerService jobSeekerService;
 
-    @GetMapping("/getall")
+    @GetMapping("/getAll")
     public DataResult<List<GetAllJobSeekersResponse>> getAll(){
         return jobSeekerService.getAll();
     }
