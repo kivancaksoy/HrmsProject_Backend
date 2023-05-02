@@ -1,16 +1,20 @@
 package kodlamaio.hrmsProject.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
-@Table(name = "employers")
+@Table(name = "companies")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Employer {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "jobAdvertisements"})
+public class Company {
 
     @Id
     @Column(name = "id")
@@ -27,7 +31,10 @@ public class Employer {
     private String phoneNumber;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employer_id", referencedColumnName = "id")
+    @JoinColumn(name = "company_user_id", referencedColumnName = "id")
     private User user;
+
+    @OneToMany(mappedBy = "company")
+    private List<JobAdvertisement> jobAdvertisements;
 
 }

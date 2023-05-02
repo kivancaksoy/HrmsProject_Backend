@@ -6,22 +6,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
-@Table(name = "users")
-@Data
+@Table(name = "cities")
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "companies"})
-public class User {
+@Data
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "jobAdvertisements"})
+public class City {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "email")
-    private String email;
+    @Column(name = "city_name")
+    private String cityName;
 
-    @Column(name = "password")
-    private String password;
+    @OneToMany(mappedBy = "city")
+    private List<JobAdvertisement> jobAdvertisements;
 }

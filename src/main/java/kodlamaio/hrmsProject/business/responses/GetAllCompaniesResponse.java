@@ -4,17 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetAllJobSeekersResponse {
+public class GetAllCompaniesResponse {
     private int id;
-    private int jobSeekerUserId;
+    private int companyUserId;
     private String email;
-    private String firstName;
-    private String lastName;
-    private String tckn;
-    private Date birthDate;
+    private String companyName;
+    private String webSite;
+    private String phoneNumber;
 }

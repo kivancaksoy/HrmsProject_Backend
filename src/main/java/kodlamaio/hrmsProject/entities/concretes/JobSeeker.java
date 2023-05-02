@@ -32,6 +32,6 @@ public class JobSeeker {
     private Date birthDate;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "job_seeker_id", referencedColumnName = "id")
+    @JoinColumn(name = "job_seeker_user_id", referencedColumnName = "id")
     private User user;
 }
