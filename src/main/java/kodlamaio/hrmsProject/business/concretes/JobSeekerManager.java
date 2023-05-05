@@ -4,6 +4,7 @@ import kodlamaio.hrmsProject.business.abstracts.JobSeekerService;
 import kodlamaio.hrmsProject.business.businessRules.JobSeekerBusinessRules;
 import kodlamaio.hrmsProject.business.requests.CreateJobSeekerRequest;
 import kodlamaio.hrmsProject.business.responses.GetAllJobSeekersResponse;
+import kodlamaio.hrmsProject.business.validations.emailVerification.EmailVerificationService;
 import kodlamaio.hrmsProject.core.utilities.businessRules.BusinessRules;
 import kodlamaio.hrmsProject.core.utilities.mappers.ModelMapperService;
 import kodlamaio.hrmsProject.core.utilities.results.DataResult;
@@ -11,9 +12,7 @@ import kodlamaio.hrmsProject.core.utilities.results.Result;
 import kodlamaio.hrmsProject.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrmsProject.core.utilities.results.SuccessResult;
 import kodlamaio.hrmsProject.dataAccess.abstracts.JobSeekerDao;
-import kodlamaio.hrmsProject.dataAccess.abstracts.UserDao;
-import kodlamaio.hrmsProject.entities.concretes.JobSeeker;
-import kodlamaio.hrmsProject.entities.concretes.User;
+import kodlamaio.hrmsProject.entities.concretes.appUsers.JobSeeker;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,26 +25,28 @@ public class JobSeekerManager implements JobSeekerService {
     private JobSeekerDao jobSeekerDao;
     private ModelMapperService modelMapperService;
     private JobSeekerBusinessRules jobSeekerBusinessRules;
+    private EmailVerificationService emailVerificationService;
 
     @Override
     public Result add(CreateJobSeekerRequest createJobSeekerRequest) {
         var businessResult = BusinessRules.Run(jobSeekerBusinessRules.emailCanNotBeDublicated(createJobSeekerRequest.getEmail()),
                 jobSeekerBusinessRules.tcknCanNotBeDublicated(createJobSeekerRequest.getTckn()),
-                jobSeekerBusinessRules.isEmailVerified(createJobSeekerRequest.getEmail()),
                 jobSeekerBusinessRules.isPersonVerified(createJobSeekerRequest));
 
         if (businessResult != null)
             return businessResult;
 
         JobSeeker jobseeker = modelMapperService.forRequest().map(createJobSeekerRequest, JobSeeker.class);
-        jobSeekerDao.save(jobseeker);
+        JobSeeker createdJobSeeker = jobSeekerDao.save(jobseeker);
 
-        return new SuccessResult("Job seeker created.");
+        emailVerificationService.createEmailVerificationCodeJobSeeker(createdJobSeeker);
+        return new SuccessResult("An email has been sent, please check your email.");
     }
 
     @Override
     public DataResult<List<GetAllJobSeekersResponse>> getAll() {
-        List<JobSeeker> jobSeekers = jobSeekerDao.findAll();
+        //List<JobSeeker> jobSeekers = jobSeekerDao.findAll();
+        List<JobSeeker> jobSeekers = jobSeekerDao.getAllActiveJobSeekers();
 
         List<GetAllJobSeekersResponse> getAllJobSeekerResponses =
                 jobSeekers.stream().map(jobSeeker ->

@@ -1,10 +1,11 @@
-package kodlamaio.hrmsProject.entities.concretes;
+package kodlamaio.hrmsProject.entities.concretes.appUsers;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import kodlamaio.hrmsProject.entities.concretes.verifications.HrmsEmployeeConfirmCompany;
+import kodlamaio.hrmsProject.entities.concretes.JobAdvertisement;
+import kodlamaio.hrmsProject.entities.concretes.verifications.emailVerifications.EmailVerificationCodeCompany;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -55,5 +56,11 @@ public class Company extends User {
 
     @OneToMany(mappedBy = "company")
     private List<JobAdvertisement> jobAdvertisements;
+
+    @OneToOne(mappedBy = "company")
+    private EmailVerificationCodeCompany emailVerificationCodeCompany;
+
+    @OneToOne(mappedBy = "company")
+    private HrmsEmployeeConfirmCompany hrmsEmployeeConfirmCompany;
 
 }

@@ -4,13 +4,12 @@ import kodlamaio.hrmsProject.business.abstracts.CompanyService;
 import kodlamaio.hrmsProject.business.businessRules.CompaniesBusinessRules;
 import kodlamaio.hrmsProject.business.requests.CreateCompanyRequest;
 import kodlamaio.hrmsProject.business.responses.GetAllCompaniesResponse;
+import kodlamaio.hrmsProject.business.validations.emailVerification.EmailVerificationService;
 import kodlamaio.hrmsProject.core.utilities.businessRules.BusinessRules;
 import kodlamaio.hrmsProject.core.utilities.mappers.ModelMapperService;
 import kodlamaio.hrmsProject.core.utilities.results.*;
 import kodlamaio.hrmsProject.dataAccess.abstracts.CompanyDao;
-import kodlamaio.hrmsProject.dataAccess.abstracts.UserDao;
-import kodlamaio.hrmsProject.entities.concretes.Company;
-import kodlamaio.hrmsProject.entities.concretes.User;
+import kodlamaio.hrmsProject.entities.concretes.appUsers.Company;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,26 +22,28 @@ public class CompanyManager implements CompanyService {
     private CompanyDao companyDao;
     private ModelMapperService modelMapperService;
     private CompaniesBusinessRules companiesBusinessRules;
+    private EmailVerificationService emailVerificationService;
 
     @Override
     public Result add(CreateCompanyRequest createCompanyRequest) {
 
         var businessResult = BusinessRules.Run(companiesBusinessRules.isEmailAndWebSiteOnTheSameDomain(createCompanyRequest),
-                companiesBusinessRules.emailCanNotBeDublicated(createCompanyRequest.getEmail()),
-                companiesBusinessRules.isEmailVerified(createCompanyRequest.getEmail()));
+                companiesBusinessRules.emailCanNotBeDublicated(createCompanyRequest.getEmail()));
 
         if (businessResult != null)
             return businessResult;
 
         Company company = modelMapperService.forRequest().map(createCompanyRequest, Company.class);
-        companyDao.save(company);
+        Company createdCompany = companyDao.save(company);
 
-        return new SuccessResult("Company created.");
+        emailVerificationService.createEmailVerificationCodeCompany(createdCompany);
+        return new SuccessResult("An email has been sent, please check your email.");
     }
 
     @Override
     public DataResult<List<GetAllCompaniesResponse>> getAll() {
-        List<Company> companies = companyDao.findAll();
+        //List<Company> companies = companyDao.findAll();
+        List<Company> companies = companyDao.getAllActiveCompanies();
 
         List<GetAllCompaniesResponse> getAllCompaniesResponses =
                 companies.stream().map(company ->

@@ -1,11 +1,11 @@
 package kodlamaio.hrmsProject.business.businessRules;
 
 import kodlamaio.hrmsProject.business.requests.CreateJobSeekerRequest;
-import kodlamaio.hrmsProject.business.validations.emailVerification.EmailVerificationService;
 import kodlamaio.hrmsProject.business.validations.mernisValidation.MernisValidationService;
 import kodlamaio.hrmsProject.core.utilities.results.ErrorResult;
 import kodlamaio.hrmsProject.core.utilities.results.Result;
 import kodlamaio.hrmsProject.core.utilities.results.SuccessResult;
+import kodlamaio.hrmsProject.dataAccess.abstracts.verificationDaos.EmailVerificationCodeDao;
 import kodlamaio.hrmsProject.dataAccess.abstracts.JobSeekerDao;
 import kodlamaio.hrmsProject.dataAccess.abstracts.UserDao;
 import lombok.AllArgsConstructor;
@@ -17,17 +17,11 @@ public class JobSeekerBusinessRules {
 
     private JobSeekerDao jobSeekerDao;
     private UserDao userDao;
-    private EmailVerificationService emailVerificationService;
+    private EmailVerificationCodeDao emailVerificationCodeDao;
     private MernisValidationService mernisValidationService;
 
-    public Result isEmailVerified(String email) {
-        boolean isVerified = emailVerificationService.isEmailApproved(email);
-        if (isVerified)
-            return new SuccessResult();
-        return new ErrorResult("Email is not verified!");
-    }
 
-    public Result isPersonVerified (CreateJobSeekerRequest createJobSeekerRequest){
+    public Result isPersonVerified(CreateJobSeekerRequest createJobSeekerRequest) {
         boolean isVerified = mernisValidationService.checkIfRealPerson(createJobSeekerRequest);
 
         if (isVerified)

@@ -1,6 +1,7 @@
 package kodlamaio.hrmsProject.entities.concretes;
 
 import jakarta.persistence.*;
+import kodlamaio.hrmsProject.entities.concretes.appUsers.Company;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

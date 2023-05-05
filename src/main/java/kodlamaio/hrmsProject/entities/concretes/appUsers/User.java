@@ -1,4 +1,4 @@
-package kodlamaio.hrmsProject.entities.concretes;
+package kodlamaio.hrmsProject.entities.concretes.appUsers;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;

@@ -1,9 +1,9 @@
-package kodlamaio.hrmsProject.entities.concretes;
+package kodlamaio.hrmsProject.entities.concretes.appUsers;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import kodlamaio.hrmsProject.entities.concretes.verifications.emailVerifications.EmailVerificationCodeJobSeeker;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.Date;
 
@@ -51,4 +51,8 @@ public class JobSeeker extends User {
 
     @Column(name = "birth_date")
     private Date birthDate;
+
+    //email verification control
+    @OneToOne(mappedBy = "jobSeeker")
+    private EmailVerificationCodeJobSeeker emailVerificationCodeJobSeeker;
 }
