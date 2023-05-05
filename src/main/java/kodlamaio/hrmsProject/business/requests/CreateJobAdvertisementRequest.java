@@ -35,7 +35,7 @@ public class CreateJobAdvertisementRequest {
     @NotNull
     private Date jobPostingDate;
 
-    private boolean isActive = true;
+    private boolean status = true;
 
     @NotNull
     private int cityId;

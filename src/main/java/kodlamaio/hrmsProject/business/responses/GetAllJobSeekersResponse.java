@@ -11,7 +11,6 @@ import java.util.Date;
 @NoArgsConstructor
 public class GetAllJobSeekersResponse {
     private int id;
-    private int jobSeekerUserId;
     private String email;
     private String firstName;
     private String lastName;

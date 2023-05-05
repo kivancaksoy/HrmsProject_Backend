@@ -24,7 +24,6 @@ import java.util.List;
 public class JobSeekerManager implements JobSeekerService {
 
     private JobSeekerDao jobSeekerDao;
-    private UserDao userDao;
     private ModelMapperService modelMapperService;
     private JobSeekerBusinessRules jobSeekerBusinessRules;
 
@@ -38,11 +37,7 @@ public class JobSeekerManager implements JobSeekerService {
         if (businessResult != null)
             return businessResult;
 
-        User user = modelMapperService.forRequest().map(createJobSeekerRequest, User.class);
         JobSeeker jobseeker = modelMapperService.forRequest().map(createJobSeekerRequest, JobSeeker.class);
-
-        User createdUser = userDao.save(user);
-        jobseeker.setUser(createdUser);
         jobSeekerDao.save(jobseeker);
 
         return new SuccessResult("Job seeker created.");

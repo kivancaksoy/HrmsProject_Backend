@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-@Entity
+/*@Entity
 @Table(name = "job_seekers")
 @Data
 @AllArgsConstructor
@@ -34,4 +34,21 @@ public class JobSeeker {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_seeker_user_id", referencedColumnName = "id")
     private User user;
+}*/
+@Entity
+@Table(name = "job_seekers")
+@Data
+public class JobSeeker extends User {
+
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Column(name = "tckn")
+    private String tckn;
+
+    @Column(name = "birth_date")
+    private Date birthDate;
 }

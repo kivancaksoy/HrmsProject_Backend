@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GetAllCompaniesResponse {
     private int id;
-    private int companyUserId;
     private String email;
     private String companyName;
     private String webSite;

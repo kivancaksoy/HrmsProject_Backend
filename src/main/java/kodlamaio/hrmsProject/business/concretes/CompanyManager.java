@@ -21,7 +21,6 @@ import java.util.List;
 public class CompanyManager implements CompanyService {
 
     private CompanyDao companyDao;
-    private UserDao userDao;
     private ModelMapperService modelMapperService;
     private CompaniesBusinessRules companiesBusinessRules;
 
@@ -35,13 +34,8 @@ public class CompanyManager implements CompanyService {
         if (businessResult != null)
             return businessResult;
 
-        User user = modelMapperService.forRequest().map(createCompanyRequest, User.class);
         Company company = modelMapperService.forRequest().map(createCompanyRequest, Company.class);
-
-        User createdUser = userDao.save(user);
-        company.setUser(createdUser);
         companyDao.save(company);
-
 
         return new SuccessResult("Company created.");
     }
