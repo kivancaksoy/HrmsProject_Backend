@@ -4,7 +4,7 @@ import kodlamaio.hrmsProject.business.abstracts.CompanyService;
 import kodlamaio.hrmsProject.business.businessRules.CompaniesBusinessRules;
 import kodlamaio.hrmsProject.business.requests.CreateCompanyRequest;
 import kodlamaio.hrmsProject.business.responses.GetAllCompaniesResponse;
-import kodlamaio.hrmsProject.business.validations.emailVerification.EmailVerificationService;
+import kodlamaio.hrmsProject.business.validations.emailVerifications.EmailVerificationService;
 import kodlamaio.hrmsProject.core.utilities.businessRules.BusinessRules;
 import kodlamaio.hrmsProject.core.utilities.mappers.ModelMapperService;
 import kodlamaio.hrmsProject.core.utilities.results.*;

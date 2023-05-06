@@ -1,4 +1,4 @@
-package kodlamaio.hrmsProject.business.validations.emailVerification;
+package kodlamaio.hrmsProject.business.validations.emailVerifications;
 
 
 import kodlamaio.hrmsProject.dataAccess.abstracts.verificationDaos.EmailVerificationCodeCompanyDao;

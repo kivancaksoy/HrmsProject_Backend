@@ -1,10 +1,11 @@
-package kodlamaio.hrmsProject.business.validations.mernisValidation;
+package kodlamaio.hrmsProject.business.adapters.mernis;
 
 import kodlamaio.hrmsProject.business.requests.CreateJobSeekerRequest;
+import kodlamaio.hrmsProject.business.validations.personValidations.PersonValidationService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MernisValidationManager implements MernisValidationService {
+public class MernisServiceAdapter implements PersonValidationService {
     @Override
     public boolean checkIfRealPerson(CreateJobSeekerRequest createJobSeekerRequest) {
         return true;

@@ -1,7 +1,7 @@
 package kodlamaio.hrmsProject.business.businessRules;
 
 import kodlamaio.hrmsProject.business.requests.CreateJobSeekerRequest;
-import kodlamaio.hrmsProject.business.validations.mernisValidation.MernisValidationService;
+import kodlamaio.hrmsProject.business.validations.personValidations.PersonValidationService;
 import kodlamaio.hrmsProject.core.utilities.results.ErrorResult;
 import kodlamaio.hrmsProject.core.utilities.results.Result;
 import kodlamaio.hrmsProject.core.utilities.results.SuccessResult;
@@ -18,11 +18,11 @@ public class JobSeekerBusinessRules {
     private JobSeekerDao jobSeekerDao;
     private UserDao userDao;
     private EmailVerificationCodeDao emailVerificationCodeDao;
-    private MernisValidationService mernisValidationService;
+    private PersonValidationService personValidationService;
 
 
     public Result isPersonVerified(CreateJobSeekerRequest createJobSeekerRequest) {
-        boolean isVerified = mernisValidationService.checkIfRealPerson(createJobSeekerRequest);
+        boolean isVerified = personValidationService.checkIfRealPerson(createJobSeekerRequest);
 
         if (isVerified)
             return new SuccessResult();

@@ -4,7 +4,7 @@ import kodlamaio.hrmsProject.business.abstracts.JobSeekerService;
 import kodlamaio.hrmsProject.business.businessRules.JobSeekerBusinessRules;
 import kodlamaio.hrmsProject.business.requests.CreateJobSeekerRequest;
 import kodlamaio.hrmsProject.business.responses.GetAllJobSeekersResponse;
-import kodlamaio.hrmsProject.business.validations.emailVerification.EmailVerificationService;
+import kodlamaio.hrmsProject.business.validations.emailVerifications.EmailVerificationService;
 import kodlamaio.hrmsProject.core.utilities.businessRules.BusinessRules;
 import kodlamaio.hrmsProject.core.utilities.mappers.ModelMapperService;
 import kodlamaio.hrmsProject.core.utilities.results.DataResult;

@@ -1,9 +1,7 @@
-package kodlamaio.hrmsProject.business.validations.emailVerification;
+package kodlamaio.hrmsProject.business.validations.emailVerifications;
 
 import kodlamaio.hrmsProject.entities.concretes.appUsers.Company;
 import kodlamaio.hrmsProject.entities.concretes.appUsers.JobSeeker;
-
-import java.util.UUID;
 
 public interface EmailVerificationService {
     void createEmailVerificationCodeCompany(Company company);
