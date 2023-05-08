@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface SchoolService {
     Result add(List<CreateSchoolRequest> createSchoolRequests);
-    DataResult<List<GetAllSchoolsResponse>> getAllOrderByGraduatedYearDesc();
+    DataResult<List<GetAllSchoolsResponse>> getAllByJobSeekerIdOrderByGraduatedYearDesc(int jobSeekerId);
 }

@@ -1,11 +1,13 @@
 package kodlamaio.hrmsProject.entities.concretes.appUsers;
 
 import jakarta.persistence.*;
+import kodlamaio.hrmsProject.entities.concretes.jobSeekerCvInformations.*;
 import kodlamaio.hrmsProject.entities.concretes.verifications.emailVerifications.EmailVerificationCodeJobSeeker;
 import lombok.Data;
 import lombok.ToString;
 
 import java.util.Date;
+import java.util.List;
 
 /*@Entity
 @Table(name = "job_seekers")
@@ -55,4 +57,26 @@ public class JobSeeker extends User {
     //email verification control
     @OneToOne(mappedBy = "jobSeeker")
     private EmailVerificationCodeJobSeeker emailVerificationCodeJobSeeker;
+
+    //CV informations
+    @OneToOne(mappedBy = "jobSeeker")
+    private CoverLetter coverLetter;
+
+    @OneToMany(mappedBy = "jobSeeker")
+    private List<JobExperience> jobExperiences;
+
+    @OneToMany(mappedBy = "jobSeeker")
+    private List<JobSeekerImage> jobSeekerImages;
+
+    @OneToOne(mappedBy = "jobSeeker")
+    private JobSeekerWebAddress jobSeekerWebAddress;
+
+    @OneToMany(mappedBy = "jobSeeker")
+    private List<Language> languages;
+
+    @OneToMany(mappedBy = "jobSeeker")
+    private List<School> schools;
+
+    @OneToMany(mappedBy = "jobSeeker")
+    private List<Technology> technologies;
 }

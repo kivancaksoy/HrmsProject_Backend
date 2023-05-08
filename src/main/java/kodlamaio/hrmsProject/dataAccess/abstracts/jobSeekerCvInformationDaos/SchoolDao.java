@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface SchoolDao extends JpaRepository<School, Integer> {
-    List<School> findAllByOrderByGraduatedYearDesc();
+    List<School> findAllByJobSeekerIdOrderByGraduatedYearDesc(int jobSeekerId);
 }

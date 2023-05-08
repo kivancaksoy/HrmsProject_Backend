@@ -37,8 +37,8 @@ public class SchoolManager implements SchoolService {
     }
 
     @Override
-    public DataResult<List<GetAllSchoolsResponse>> getAllOrderByGraduatedYearDesc() {
-        List<School> schools = schoolDao.findAllByOrderByGraduatedYearDesc();
+    public DataResult<List<GetAllSchoolsResponse>> getAllByJobSeekerIdOrderByGraduatedYearDesc(int jobSeekerId) {
+        List<School> schools = schoolDao.findAllByJobSeekerIdOrderByGraduatedYearDesc(jobSeekerId);
 
 
 

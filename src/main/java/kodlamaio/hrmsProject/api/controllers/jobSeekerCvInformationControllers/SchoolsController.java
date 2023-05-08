@@ -26,8 +26,8 @@ public class SchoolsController {
         return schoolService.add(createSchoolRequests);
     }
 
-    @GetMapping("/getAllOrderByGraduatedYearDesc")
-    public DataResult<List<GetAllSchoolsResponse>> getAllOrderByGraduatedYearDesc(){
-        return schoolService.getAllOrderByGraduatedYearDesc();
+    @GetMapping("/getAllByJobSeekerIdOrderByGraduatedYearDesc")
+    public DataResult<List<GetAllSchoolsResponse>> getAllByJobSeekerIdOrderByGraduatedYearDesc(@RequestParam int jobSeekerId){
+        return schoolService.getAllByJobSeekerIdOrderByGraduatedYearDesc(jobSeekerId);
     }
 }
