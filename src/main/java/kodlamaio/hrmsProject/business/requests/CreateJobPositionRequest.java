@@ -12,8 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreateJobPositionRequest {
 
-    @NotNull
     @NotBlank
-    @NotEmpty
     private String jobPositionName;
 }

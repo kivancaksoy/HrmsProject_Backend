@@ -14,23 +14,18 @@ import java.util.Date;
 @NoArgsConstructor
 public class CreateJobSeekerRequest {
 
-    @NotNull
     @NotBlank
     private String email;
 
-    @NotNull
     @NotBlank
     private String password;
 
-    @NotNull
     @NotBlank
     private String firstName;
 
-    @NotNull
     @NotBlank
     private String lastName;
 
-    @NotNull
     @NotBlank
     @Size(min = 11, max = 11)
     private String tckn;

@@ -1,5 +1,6 @@
 package kodlamaio.hrmsProject.business.requests;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -19,6 +20,7 @@ public class CreateJobAdvertisementRequest {
     @NotNull
     private int jobPositionId;
 
+    @NotBlank
     @Size(min = 2)
     private String description;
 
@@ -27,6 +29,7 @@ public class CreateJobAdvertisementRequest {
     private Integer maxSalary;
 
     @NotNull
+    @Min(1)
     private int numberOfJobOpenings;
 
     @NotNull
@@ -38,5 +41,6 @@ public class CreateJobAdvertisementRequest {
     private boolean status = true;
 
     @NotNull
+    @Min(1)
     private int cityId;
 }

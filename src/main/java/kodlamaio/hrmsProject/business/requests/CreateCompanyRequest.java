@@ -10,23 +10,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateCompanyRequest {
-    @NotNull
     @NotBlank
     private String email;
 
-    @NotNull
     @NotBlank
     private String password;
 
-    @NotNull
     @NotBlank
     private String companyName;
 
-    @NotNull
     @NotBlank
     private String phoneNumber;
 
-    @NotNull
     @NotBlank
     private String webSite;
 }
