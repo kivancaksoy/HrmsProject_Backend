@@ -21,6 +21,5 @@ public class JobSeekerWebAddress {
 
     @OneToOne
     @MapsId
-    @JoinColumn(name = "job_seeker_id")
     private JobSeeker jobSeeker;
 }
