@@ -17,6 +17,7 @@ public class CoverLetter {
 
     @OneToOne
     @MapsId
-    @JoinColumn(name = "job_seeker_id")
+    //@JoinColumn(name = "job_seeker_id") OneToOne'da ortak Id kolonu kullanılıyorsa, JoinColumn kapatmak gerekiyor
+    //yoksa null identifier hatası alınıyor.
     private JobSeeker jobSeeker;
 }
