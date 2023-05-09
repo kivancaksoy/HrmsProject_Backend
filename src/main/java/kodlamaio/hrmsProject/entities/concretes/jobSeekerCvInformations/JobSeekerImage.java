@@ -19,6 +19,9 @@ public class JobSeekerImage {
     @Column(name = "image_path")
     private String imagePath;
 
+    @Column(name = "storage_name")
+    private String storageName;
+
     @ManyToOne
     @JoinColumn(name = "job_seeker_id")
     private JobSeeker jobSeeker;
