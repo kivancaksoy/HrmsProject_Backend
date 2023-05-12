@@ -1,9 +1,13 @@
 package kodlamaio.hrmsProject.entities.concretes.appUsers;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import kodlamaio.hrmsProject.entities.concretes.jobSeekerCvInformations.*;
 import kodlamaio.hrmsProject.entities.concretes.verifications.emailVerifications.EmailVerificationCodeJobSeeker;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Date;
@@ -39,7 +43,9 @@ public class JobSeeker {
 }*/
 @Entity
 @Table(name = "job_seekers")
-@Data
+@Getter
+@Setter
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "jobExperiences", "jobSeekerImages", "languages", "schools", "technologies"})
 public class JobSeeker extends User {
 
     @Column(name = "first_name")

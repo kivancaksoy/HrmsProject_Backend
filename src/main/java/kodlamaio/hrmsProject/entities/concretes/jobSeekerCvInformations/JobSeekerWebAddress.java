@@ -3,10 +3,13 @@ package kodlamaio.hrmsProject.entities.concretes.jobSeekerCvInformations;
 import jakarta.persistence.*;
 import kodlamaio.hrmsProject.entities.concretes.appUsers.JobSeeker;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "job_seeker_web_addresses")
-@Data
+@Getter
+@Setter
 public class JobSeekerWebAddress {
 
     @Id

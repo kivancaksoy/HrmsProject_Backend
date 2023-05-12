@@ -2,8 +2,11 @@ package kodlamaio.hrmsProject.business.concretes.jobSeekerCvManagers;
 
 import kodlamaio.hrmsProject.business.abstracts.jobSeekerCvServices.LanguageService;
 import kodlamaio.hrmsProject.business.requests.jobSeekerCvInformationRequests.CreateLanguageRequest;
+import kodlamaio.hrmsProject.business.responses.jobSeekerCvInformationResponses.GetAllLanguagesResponse;
 import kodlamaio.hrmsProject.core.utilities.mappers.ModelMapperService;
+import kodlamaio.hrmsProject.core.utilities.results.DataResult;
 import kodlamaio.hrmsProject.core.utilities.results.Result;
+import kodlamaio.hrmsProject.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrmsProject.core.utilities.results.SuccessResult;
 import kodlamaio.hrmsProject.dataAccess.abstracts.jobSeekerCvInformationDaos.LanguageDao;
 import kodlamaio.hrmsProject.entities.concretes.jobSeekerCvInformations.Language;
@@ -30,5 +33,15 @@ public class LanguageManager implements LanguageService {
                         modelMapperService.forRequest().map(createLanguageRequest, Language.class)).toList();
         languageDao.saveAll(languages);
         return new SuccessResult("Languages added.");
+    }
+
+    @Override
+    public DataResult<List<GetAllLanguagesResponse>> getAllLanguagesByJobSeekerId(int jobSeekerId) {
+        List<Language> languages = languageDao.findAllByJobSeekerId(jobSeekerId);
+
+        List<GetAllLanguagesResponse> getAllLanguagesResponses =
+                languages.stream().map(language ->
+                        modelMapperService.forResponse().map(language, GetAllLanguagesResponse.class)).toList();
+        return new SuccessDataResult<>(getAllLanguagesResponses);
     }
 }

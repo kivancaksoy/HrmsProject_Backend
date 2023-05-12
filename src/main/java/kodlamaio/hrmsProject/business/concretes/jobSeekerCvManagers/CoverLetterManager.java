@@ -2,8 +2,11 @@ package kodlamaio.hrmsProject.business.concretes.jobSeekerCvManagers;
 
 import kodlamaio.hrmsProject.business.abstracts.jobSeekerCvServices.CoverLetterService;
 import kodlamaio.hrmsProject.business.requests.jobSeekerCvInformationRequests.CreateCoverLetterRequest;
+import kodlamaio.hrmsProject.business.responses.jobSeekerCvInformationResponses.GetCoverLetterResponse;
 import kodlamaio.hrmsProject.core.utilities.mappers.ModelMapperService;
+import kodlamaio.hrmsProject.core.utilities.results.DataResult;
 import kodlamaio.hrmsProject.core.utilities.results.Result;
+import kodlamaio.hrmsProject.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrmsProject.core.utilities.results.SuccessResult;
 import kodlamaio.hrmsProject.dataAccess.abstracts.jobSeekerCvInformationDaos.CoverLetterDao;
 import kodlamaio.hrmsProject.entities.concretes.jobSeekerCvInformations.CoverLetter;
@@ -26,5 +29,16 @@ public class CoverLetterManager implements CoverLetterService {
         CoverLetter coverLetter = modelMapperService.forRequest().map(createCoverLetterRequest, CoverLetter.class);
         coverLetterDao.save(coverLetter);
         return new SuccessResult("Cover letter added.");
+    }
+
+    @Override
+    public DataResult<GetCoverLetterResponse> getCoverLetterByJobSeekerId(int jobSeekerId) {
+        CoverLetter coverLetter = coverLetterDao.findById(jobSeekerId).orElseThrow();
+
+        GetCoverLetterResponse getCoverLetterResponse = new GetCoverLetterResponse();
+        getCoverLetterResponse.setJobSeekerId(coverLetter.getJobSeekerId());
+        getCoverLetterResponse.setCoverLetter(coverLetter.getCoverLetter());
+
+        return new SuccessDataResult<>(getCoverLetterResponse);
     }
 }
