@@ -1,7 +1,7 @@
 package kodlamaio.hrmsProject.business.concretes;
 
 import kodlamaio.hrmsProject.business.abstracts.JobPositionService;
-import kodlamaio.hrmsProject.business.businessRules.JobPositonBusinessRules;
+import kodlamaio.hrmsProject.business.services.businessRules.JobPositonBusinessRules;
 import kodlamaio.hrmsProject.business.requests.CreateJobPositionRequest;
 import kodlamaio.hrmsProject.business.responses.GetAllJobPositionsResponse;
 import kodlamaio.hrmsProject.core.utilities.businessRules.BusinessRules;

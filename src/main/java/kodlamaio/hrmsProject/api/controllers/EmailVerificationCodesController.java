@@ -1,6 +1,6 @@
 package kodlamaio.hrmsProject.api.controllers;
 
-import kodlamaio.hrmsProject.business.validations.emailVerifications.EmailVerificationService;
+import kodlamaio.hrmsProject.business.services.validations.emailVerifications.EmailVerificationService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

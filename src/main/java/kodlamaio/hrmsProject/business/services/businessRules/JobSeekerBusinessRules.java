@@ -1,7 +1,7 @@
-package kodlamaio.hrmsProject.business.businessRules;
+package kodlamaio.hrmsProject.business.services.businessRules;
 
 import kodlamaio.hrmsProject.business.requests.CreateJobSeekerRequest;
-import kodlamaio.hrmsProject.business.validations.personValidations.PersonValidationService;
+import kodlamaio.hrmsProject.business.services.validations.personValidations.PersonValidationService;
 import kodlamaio.hrmsProject.core.utilities.results.ErrorResult;
 import kodlamaio.hrmsProject.core.utilities.results.Result;
 import kodlamaio.hrmsProject.core.utilities.results.SuccessResult;

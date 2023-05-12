@@ -1,6 +1,6 @@
 package kodlamaio.hrmsProject.api.controllers;
 
-import kodlamaio.hrmsProject.business.validations.hrmsEmployeeConfirms.HrmsEmployeeConfirmService;
+import kodlamaio.hrmsProject.business.services.validations.hrmsEmployeeConfirms.HrmsEmployeeConfirmService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

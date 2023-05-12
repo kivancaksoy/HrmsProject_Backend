@@ -1,4 +1,4 @@
-package kodlamaio.hrmsProject.business.validations.hrmsEmployeeConfirms;
+package kodlamaio.hrmsProject.business.services.validations.hrmsEmployeeConfirms;
 
 import kodlamaio.hrmsProject.dataAccess.abstracts.CompanyDao;
 import kodlamaio.hrmsProject.dataAccess.abstracts.HrmsEmployeeDao;

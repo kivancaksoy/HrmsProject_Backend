@@ -1,4 +1,4 @@
-package kodlamaio.hrmsProject.business.validations.personValidations;
+package kodlamaio.hrmsProject.business.services.validations.personValidations;
 
 import kodlamaio.hrmsProject.business.requests.CreateJobSeekerRequest;
 

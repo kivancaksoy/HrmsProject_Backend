@@ -1,4 +1,4 @@
-package kodlamaio.hrmsProject.business.validations.emailVerifications;
+package kodlamaio.hrmsProject.business.services.validations.emailVerifications;
 
 import kodlamaio.hrmsProject.entities.concretes.appUsers.Company;
 import kodlamaio.hrmsProject.entities.concretes.appUsers.JobSeeker;
