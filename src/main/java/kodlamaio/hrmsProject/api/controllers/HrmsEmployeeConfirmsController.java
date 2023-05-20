@@ -19,4 +19,9 @@ public class HrmsEmployeeConfirmsController {
     public void confirmCompany(@RequestParam int hrmsEmployeeId, @RequestParam int companyId){
         hrmsEmployeeConfirmService.confirmCompany(hrmsEmployeeId, companyId);
     }
+
+    @PostMapping("/confirmJobAdvertisement")
+    public void confirmJobAdvertisement(@RequestParam int hrmsEmployeeId, @RequestParam int jobAdvertisementId){
+        hrmsEmployeeConfirmService.confirmJobAdvertisement(hrmsEmployeeId, jobAdvertisementId);
+    }
 }

@@ -2,6 +2,7 @@ package kodlamaio.hrmsProject.entities.concretes;
 
 import jakarta.persistence.*;
 import kodlamaio.hrmsProject.entities.concretes.appUsers.Company;
+import kodlamaio.hrmsProject.entities.concretes.verifications.hrmsEmployeeVerifications.HrmsEmployeeConfirmJobAdvertisement;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -60,5 +61,8 @@ public class JobAdvertisement {
     @ManyToOne()
     @JoinColumn(name = "location_type_id")
     private LocationType locationType;
+
+    @OneToOne(mappedBy = "jobAdvertisement")
+    private HrmsEmployeeConfirmJobAdvertisement hrmsEmployeeConfirmJobAdvertisement;
 
 }

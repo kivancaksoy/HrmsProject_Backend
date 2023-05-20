@@ -1,4 +1,4 @@
-package kodlamaio.hrmsProject.entities.concretes.verifications;
+package kodlamaio.hrmsProject.entities.concretes.verifications.hrmsEmployeeVerifications;
 
 import jakarta.persistence.*;
 import kodlamaio.hrmsProject.entities.concretes.appUsers.HrmsEmployee;

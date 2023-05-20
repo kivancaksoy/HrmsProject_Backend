@@ -1,7 +1,7 @@
 package kodlamaio.hrmsProject.entities.concretes.appUsers;
 
 import jakarta.persistence.*;
-import kodlamaio.hrmsProject.entities.concretes.verifications.HrmsEmployeeConfirm;
+import kodlamaio.hrmsProject.entities.concretes.verifications.hrmsEmployeeVerifications.HrmsEmployeeConfirm;
 import lombok.Data;
 
 @Entity

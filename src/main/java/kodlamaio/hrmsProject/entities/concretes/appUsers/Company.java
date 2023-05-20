@@ -1,8 +1,7 @@
 package kodlamaio.hrmsProject.entities.concretes.appUsers;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import kodlamaio.hrmsProject.entities.concretes.verifications.HrmsEmployeeConfirmCompany;
+import kodlamaio.hrmsProject.entities.concretes.verifications.hrmsEmployeeVerifications.HrmsEmployeeConfirmCompany;
 import kodlamaio.hrmsProject.entities.concretes.JobAdvertisement;
 import kodlamaio.hrmsProject.entities.concretes.verifications.emailVerifications.EmailVerificationCodeCompany;
 import lombok.Data;
