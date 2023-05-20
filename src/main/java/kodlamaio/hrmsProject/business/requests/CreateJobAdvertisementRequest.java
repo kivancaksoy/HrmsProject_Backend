@@ -43,4 +43,12 @@ public class CreateJobAdvertisementRequest {
     @NotNull
     @Min(1)
     private int cityId;
+
+    @NotNull
+    @Min(1)
+    private int employmentTypeId;
+
+    @NotNull
+    @Min(1)
+    private int locationTypeId;
 }

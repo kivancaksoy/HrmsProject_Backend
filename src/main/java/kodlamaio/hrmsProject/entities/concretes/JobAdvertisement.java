@@ -53,4 +53,12 @@ public class JobAdvertisement {
     @JoinColumn(name = "company_id", referencedColumnName = "id")
     private Company company;
 
+    @ManyToOne()
+    @JoinColumn(name = "employment_type_id")
+    private EmploymentType employmentType;
+
+    @ManyToOne()
+    @JoinColumn(name = "location_type_id")
+    private LocationType locationType;
+
 }
