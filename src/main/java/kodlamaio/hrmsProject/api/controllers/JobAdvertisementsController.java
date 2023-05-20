@@ -38,6 +38,11 @@ public class JobAdvertisementsController {
         return jobAdvertisementService.getAllActiveJobAdvertisementsAndCompanyNameIs(companyName);
     }
 
+    @GetMapping("/getAllActiveAndConfirmedJobAdvertisements")
+    public DataResult<List<GetAllJobAdvertisementsResponse>> getAllActiveAndConfirmedJobAdvertisements(){
+        return jobAdvertisementService.getAllActiveAndConfirmedJobAdvertisements();
+    }
+
     @PostMapping("/add")
     public Result add(@RequestBody @Valid CreateJobAdvertisementRequest createJobAdvertisementRequest) {
         return jobAdvertisementService.add(createJobAdvertisementRequest);

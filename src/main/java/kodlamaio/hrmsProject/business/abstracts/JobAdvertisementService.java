@@ -14,4 +14,6 @@ public interface JobAdvertisementService {
     DataResult<List<GetAllJobAdvertisementsResponse>> getAllActiveJobAdvertisementsSortedByJobPostingDate();
     DataResult<List<GetAllJobAdvertisementsResponse>> getAllActiveJobAdvertisementsAndCompanyNameIs(String companyName);
     Result setJobAdvertisementStatusFalse (int jobAdvertisementId);
+
+    DataResult<List<GetAllJobAdvertisementsResponse>> getAllActiveAndConfirmedJobAdvertisements();
 }

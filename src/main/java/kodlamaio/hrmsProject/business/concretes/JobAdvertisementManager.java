@@ -89,4 +89,14 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 
         return new SuccessResult("Job advertisement status has been set to false.");
     }
+
+    @Override
+    public DataResult<List<GetAllJobAdvertisementsResponse>> getAllActiveAndConfirmedJobAdvertisements() {
+        List<JobAdvertisement> jobAdvertisements = jobAdvertisementDao.getAllActiveAndConfirmedJobAdvertisements();
+
+        List<GetAllJobAdvertisementsResponse> getAllJobAdvertisementsResponses =
+                jobAdvertisements.stream().map(jobAdvertisement ->
+                        modelMapperService.forResponse().map(jobAdvertisement, GetAllJobAdvertisementsResponse.class)).toList();
+        return new SuccessDataResult<>(getAllJobAdvertisementsResponses, "Active and confirmed Job advertisements listed.");
+    }
 }
