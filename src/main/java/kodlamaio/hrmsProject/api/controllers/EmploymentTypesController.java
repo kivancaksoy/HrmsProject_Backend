@@ -18,7 +18,7 @@ public class EmploymentTypesController {
         this.employmentTypeService = employmentTypeService;
     }
 
-    @GetMapping("/api/getAll")
+    @GetMapping("/getAll")
     public DataResult<List<GetAllEmploymentTypesResponse>> getAll(){
         return employmentTypeService.getAll();
     }
