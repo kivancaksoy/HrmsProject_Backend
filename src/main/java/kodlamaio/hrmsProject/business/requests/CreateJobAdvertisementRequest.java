@@ -36,7 +36,7 @@ public class CreateJobAdvertisementRequest {
     private Date applicationDeadline;
 
     @NotNull
-    private Date jobPostingDate;
+    private Date jobPostingDate = new Date();
 
     private boolean status = true;
 
