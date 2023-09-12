@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 
-//Sonradan düzenlenecek.
+//Todo
 public class LocalFileManager implements FileService {
     @Override
     public String uploadFile(MultipartFile file) throws IOException {

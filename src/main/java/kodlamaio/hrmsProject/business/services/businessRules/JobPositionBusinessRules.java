@@ -4,13 +4,15 @@ import kodlamaio.hrmsProject.core.utilities.results.ErrorResult;
 import kodlamaio.hrmsProject.core.utilities.results.Result;
 import kodlamaio.hrmsProject.core.utilities.results.SuccessResult;
 import kodlamaio.hrmsProject.dataAccess.abstracts.JobPositionDao;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
-public class JobPositonBusinessRules {
-    private JobPositionDao jobPositionDao;
+public class JobPositionBusinessRules {
+    private final JobPositionDao jobPositionDao;
+
+    public JobPositionBusinessRules(JobPositionDao jobPositionDao) {
+        this.jobPositionDao = jobPositionDao;
+    }
 
     public Result doesJobPositionNameExist(String jobPositionName) {
         if (!jobPositionDao.existsByJobPositionName(jobPositionName)) {

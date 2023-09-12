@@ -19,18 +19,24 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class JobSeekerManager implements JobSeekerService {
 
-    private JobSeekerDao jobSeekerDao;
-    private ModelMapperService modelMapperService;
-    private JobSeekerBusinessRules jobSeekerBusinessRules;
-    private EmailVerificationService emailVerificationService;
+    private final JobSeekerDao jobSeekerDao;
+    private final ModelMapperService modelMapperService;
+    private final JobSeekerBusinessRules jobSeekerBusinessRules;
+    private final EmailVerificationService emailVerificationService;
+
+    public JobSeekerManager(JobSeekerDao jobSeekerDao, ModelMapperService modelMapperService, JobSeekerBusinessRules jobSeekerBusinessRules, EmailVerificationService emailVerificationService) {
+        this.jobSeekerDao = jobSeekerDao;
+        this.modelMapperService = modelMapperService;
+        this.jobSeekerBusinessRules = jobSeekerBusinessRules;
+        this.emailVerificationService = emailVerificationService;
+    }
 
     @Override
     public Result add(CreateJobSeekerRequest createJobSeekerRequest) {
-        var businessResult = BusinessRules.Run(jobSeekerBusinessRules.emailCanNotBeDublicated(createJobSeekerRequest.getEmail()),
-                jobSeekerBusinessRules.tcknCanNotBeDublicated(createJobSeekerRequest.getTckn()),
+        var businessResult = BusinessRules.Run(jobSeekerBusinessRules.emailCanNotBeDuplicated(createJobSeekerRequest.getEmail()),
+                jobSeekerBusinessRules.CanCanCanNotBeDuplicated(createJobSeekerRequest.getTckn()),
                 jobSeekerBusinessRules.isPersonVerified(createJobSeekerRequest));
 
         if (businessResult != null)

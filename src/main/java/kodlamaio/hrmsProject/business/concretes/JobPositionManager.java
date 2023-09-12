@@ -1,7 +1,7 @@
 package kodlamaio.hrmsProject.business.concretes;
 
 import kodlamaio.hrmsProject.business.abstracts.JobPositionService;
-import kodlamaio.hrmsProject.business.services.businessRules.JobPositonBusinessRules;
+import kodlamaio.hrmsProject.business.services.businessRules.JobPositionBusinessRules;
 import kodlamaio.hrmsProject.business.requests.CreateJobPositionRequest;
 import kodlamaio.hrmsProject.business.responses.GetAllJobPositionsResponse;
 import kodlamaio.hrmsProject.core.utilities.businessRules.BusinessRules;
@@ -15,13 +15,17 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class JobPositionManager implements JobPositionService {
 
-    private JobPositionDao jobPositionDao;
-    private ModelMapperService modelMapperService;
-    private JobPositonBusinessRules jobPositonBusinessRules;
+    private final JobPositionDao jobPositionDao;
+    private final ModelMapperService modelMapperService;
+    private final JobPositionBusinessRules jobPositionBusinessRules;
 
+    public JobPositionManager(JobPositionDao jobPositionDao, ModelMapperService modelMapperService, JobPositionBusinessRules jobPositionBusinessRules) {
+        this.jobPositionDao = jobPositionDao;
+        this.modelMapperService = modelMapperService;
+        this.jobPositionBusinessRules = jobPositionBusinessRules;
+    }
 
     @Override
     public DataResult<List<GetAllJobPositionsResponse>> getAll() {
@@ -36,7 +40,7 @@ public class JobPositionManager implements JobPositionService {
     }
 
     public Result add(CreateJobPositionRequest createJobPositionRequest) {
-        var businessResult = BusinessRules.Run(jobPositonBusinessRules.doesJobPositionNameExist(createJobPositionRequest.getJobPositionName()));
+        var businessResult = BusinessRules.Run(jobPositionBusinessRules.doesJobPositionNameExist(createJobPositionRequest.getJobPositionName()));
 
         if (businessResult != null)
             return businessResult;

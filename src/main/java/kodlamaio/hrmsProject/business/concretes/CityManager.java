@@ -17,7 +17,6 @@ public class CityManager implements CityService {
     private final CityDao cityDao;
     private final ModelMapperService modelMapperService;
 
-    @Autowired
     public CityManager(CityDao cityDao, ModelMapperService modelMapperService) {
         this.cityDao = cityDao;
         this.modelMapperService = modelMapperService;

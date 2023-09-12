@@ -20,7 +20,6 @@ public class TechnologyManager implements TechnologyService {
     private final TechnologyDao technologyDao;
     private final ModelMapperService modelMapperService;
 
-    @Autowired
     public TechnologyManager(TechnologyDao technologyDao, ModelMapperService modelMapperService) {
         this.technologyDao = technologyDao;
         this.modelMapperService = modelMapperService;

@@ -1,12 +1,10 @@
 package kodlamaio.hrmsProject.business.adapters.cloudinary;
 
 import com.cloudinary.Cloudinary;
-import com.cloudinary.Transformation;
 import com.cloudinary.utils.ObjectUtils;
 import kodlamaio.hrmsProject.business.services.storage.FileOperations;
 import kodlamaio.hrmsProject.business.services.storage.FileService;
 import kodlamaio.hrmsProject.entities.concretes.jobSeekerCvInformations.enums.StorageType;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,8 +15,11 @@ import java.util.Map;
 
 @Service
 public class CloudinaryFileManager implements FileService {
-    @Autowired
-    private Environment environment;
+    private final Environment environment;
+
+    public CloudinaryFileManager(Environment environment) {
+        this.environment = environment;
+    }
 
     public String uploadFile(MultipartFile file) {
 

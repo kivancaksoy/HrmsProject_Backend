@@ -16,19 +16,25 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class CompanyManager implements CompanyService {
 
-    private CompanyDao companyDao;
-    private ModelMapperService modelMapperService;
-    private CompaniesBusinessRules companiesBusinessRules;
-    private EmailVerificationService emailVerificationService;
+    private final CompanyDao companyDao;
+    private final ModelMapperService modelMapperService;
+    private final CompaniesBusinessRules companiesBusinessRules;
+    private final EmailVerificationService emailVerificationService;
+
+    public CompanyManager(CompanyDao companyDao, ModelMapperService modelMapperService, CompaniesBusinessRules companiesBusinessRules, EmailVerificationService emailVerificationService) {
+        this.companyDao = companyDao;
+        this.modelMapperService = modelMapperService;
+        this.companiesBusinessRules = companiesBusinessRules;
+        this.emailVerificationService = emailVerificationService;
+    }
 
     @Override
     public Result add(CreateCompanyRequest createCompanyRequest) {
 
         var businessResult = BusinessRules.Run(companiesBusinessRules.isEmailAndWebSiteOnTheSameDomain(createCompanyRequest),
-                companiesBusinessRules.emailCanNotBeDublicated(createCompanyRequest.getEmail()));
+                companiesBusinessRules.emailCanNotBeDuplicated(createCompanyRequest.getEmail()));
 
         if (businessResult != null)
             return businessResult;

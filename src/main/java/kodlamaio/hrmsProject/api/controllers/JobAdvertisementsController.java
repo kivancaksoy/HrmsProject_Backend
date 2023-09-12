@@ -6,17 +6,19 @@ import kodlamaio.hrmsProject.business.requests.CreateJobAdvertisementRequest;
 import kodlamaio.hrmsProject.business.responses.GetAllJobAdvertisementsResponse;
 import kodlamaio.hrmsProject.core.utilities.results.DataResult;
 import kodlamaio.hrmsProject.core.utilities.results.Result;
-import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/jobAdvertisements")
-@AllArgsConstructor
 @CrossOrigin
 public class JobAdvertisementsController {
     private JobAdvertisementService jobAdvertisementService;
+
+    public JobAdvertisementsController(JobAdvertisementService jobAdvertisementService) {
+        this.jobAdvertisementService = jobAdvertisementService;
+    }
 
     @GetMapping("/getAll")
     public DataResult<List<GetAllJobAdvertisementsResponse>> getAll(){

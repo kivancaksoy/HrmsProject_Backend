@@ -20,7 +20,6 @@ public class LanguageManager implements LanguageService {
     private final LanguageDao languageDao;
     private final ModelMapperService modelMapperService;
 
-    @Autowired
     public LanguageManager(LanguageDao languageDao, ModelMapperService modelMapperService) {
         this.languageDao = languageDao;
         this.modelMapperService = modelMapperService;

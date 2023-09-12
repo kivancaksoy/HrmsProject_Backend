@@ -18,7 +18,6 @@ public class CoverLetterManager implements CoverLetterService {
     private final CoverLetterDao coverLetterDao;
     private final ModelMapperService modelMapperService;
 
-    @Autowired
     public CoverLetterManager(CoverLetterDao coverLetterDao, ModelMapperService modelMapperService) {
         this.coverLetterDao = coverLetterDao;
         this.modelMapperService = modelMapperService;

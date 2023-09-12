@@ -6,17 +6,19 @@ import kodlamaio.hrmsProject.business.requests.CreateJobPositionRequest;
 import kodlamaio.hrmsProject.business.responses.GetAllJobPositionsResponse;
 import kodlamaio.hrmsProject.core.utilities.results.DataResult;
 import kodlamaio.hrmsProject.core.utilities.results.Result;
-import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/jobPositions")
-@AllArgsConstructor
 @CrossOrigin
 public class JobPositionsController {
-    private JobPositionService jobPositionService;
+    private final JobPositionService jobPositionService;
+
+    public JobPositionsController(JobPositionService jobPositionService) {
+        this.jobPositionService = jobPositionService;
+    }
 
     @GetMapping("/getAll")
     public DataResult<List<GetAllJobPositionsResponse>> getAll(){

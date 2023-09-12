@@ -6,18 +6,20 @@ import kodlamaio.hrmsProject.business.requests.CreateCompanyRequest;
 import kodlamaio.hrmsProject.business.responses.GetAllCompaniesResponse;
 import kodlamaio.hrmsProject.core.utilities.results.DataResult;
 import kodlamaio.hrmsProject.core.utilities.results.Result;
-import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/companies")
-@AllArgsConstructor
 @CrossOrigin
 public class CompaniesController {
 
-    private CompanyService companyService;
+    private final CompanyService companyService;
+
+    public CompaniesController(CompanyService companyService) {
+        this.companyService = companyService;
+    }
 
     @GetMapping("/getAll")
     public DataResult<List<GetAllCompaniesResponse>> getAll(){

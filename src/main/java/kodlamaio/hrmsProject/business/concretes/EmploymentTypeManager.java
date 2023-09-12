@@ -17,7 +17,6 @@ public class EmploymentTypeManager implements EmploymentTypeService {
     private final EmploymentTypeDao employmentTypeDao;
     private final ModelMapperService modelMapperService;
 
-    @Autowired
     public EmploymentTypeManager(EmploymentTypeDao employmentTypeDao, ModelMapperService modelMapperService) {
         this.employmentTypeDao = employmentTypeDao;
         this.modelMapperService = modelMapperService;

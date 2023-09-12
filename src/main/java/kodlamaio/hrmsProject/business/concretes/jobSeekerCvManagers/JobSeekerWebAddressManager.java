@@ -18,7 +18,6 @@ public class JobSeekerWebAddressManager implements JobSeekerWebAddressService {
     private final JobSeekerWebAddressDao jobSeekerWebAddressDao;
     private final ModelMapperService modelMapperService;
 
-    @Autowired
     public JobSeekerWebAddressManager(JobSeekerWebAddressDao jobSeekerWebAddressDao, ModelMapperService modelMapperService) {
         this.jobSeekerWebAddressDao = jobSeekerWebAddressDao;
         this.modelMapperService = modelMapperService;

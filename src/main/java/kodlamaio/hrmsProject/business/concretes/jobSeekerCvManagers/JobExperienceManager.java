@@ -21,7 +21,6 @@ public class JobExperienceManager implements JobExperienceService {
     private final JobExperienceDao jobExperienceDao;
     private final ModelMapperService modelMapperService;
 
-    @Autowired
     public JobExperienceManager(JobExperienceDao jobExperienceDao, ModelMapperService modelMapperService) {
         this.jobExperienceDao = jobExperienceDao;
         this.modelMapperService = modelMapperService;

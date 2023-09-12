@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class HrmsEmployeeConfirmManager implements HrmsEmployeeConfirmService {
@@ -23,7 +24,6 @@ public class HrmsEmployeeConfirmManager implements HrmsEmployeeConfirmService {
     private final JobAdvertisementDao jobAdvertisementDao;
     private final HrmsEmployeeConfirmJobAdvertisementDao hrmsEmployeeConfirmJobAdvertisementDao;
 
-    @Autowired
     public HrmsEmployeeConfirmManager(HrmsEmployeeConfirmCompanyDao hrmsEmployeeConfirmCompanyDao, CompanyDao companyDao, HrmsEmployeeDao hrmsEmployeeDao, JobAdvertisementDao jobAdvertisementDao, HrmsEmployeeConfirmJobAdvertisementDao hrmsEmployeeConfirmJobAdvertisementDao) {
         this.hrmsEmployeeConfirmCompanyDao = hrmsEmployeeConfirmCompanyDao;
         this.companyDao = companyDao;
@@ -36,8 +36,8 @@ public class HrmsEmployeeConfirmManager implements HrmsEmployeeConfirmService {
     public void confirmCompany(int hrmsEmployeeId, int companyId) {
         HrmsEmployeeConfirmCompany hrmsEmployeeConfirmCompany = new HrmsEmployeeConfirmCompany();
 
-        HrmsEmployee hrmsEmployee = hrmsEmployeeDao.findById(hrmsEmployeeId).orElseThrow();
-        Company company = companyDao.findById(companyId).orElseThrow();
+        HrmsEmployee hrmsEmployee = hrmsEmployeeDao.findById(hrmsEmployeeId).orElseThrow(() -> new RuntimeException("HRMS personel does not exist."));
+        Company company = companyDao.findById(companyId).orElseThrow(() -> new RuntimeException("Company does not exist."));
 
         hrmsEmployeeConfirmCompany.setConfirmed(true);
         hrmsEmployeeConfirmCompany.setConfirmDate(new Date());

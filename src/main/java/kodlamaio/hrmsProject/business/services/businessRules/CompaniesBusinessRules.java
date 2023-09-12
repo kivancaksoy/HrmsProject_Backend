@@ -7,16 +7,20 @@ import kodlamaio.hrmsProject.core.utilities.results.SuccessResult;
 import kodlamaio.hrmsProject.dataAccess.abstracts.CompanyDao;
 import kodlamaio.hrmsProject.dataAccess.abstracts.verificationDaos.EmailVerificationCodeDao;
 import kodlamaio.hrmsProject.dataAccess.abstracts.UserDao;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
 public class CompaniesBusinessRules {
 
-    private CompanyDao companyDao;
-    private UserDao userDao;
-    private EmailVerificationCodeDao emailVerificationCodeDao;
+    private final CompanyDao companyDao;
+    private final UserDao userDao;
+    private final EmailVerificationCodeDao emailVerificationCodeDao;
+
+    public CompaniesBusinessRules(CompanyDao companyDao, UserDao userDao, EmailVerificationCodeDao emailVerificationCodeDao) {
+        this.companyDao = companyDao;
+        this.userDao = userDao;
+        this.emailVerificationCodeDao = emailVerificationCodeDao;
+    }
 
     public Result isEmailAndWebSiteOnTheSameDomain(CreateCompanyRequest createCompanyRequest) {
         int getWebSiteDomainStartingIndex = createCompanyRequest.getWebSite().indexOf(".") + 1;
@@ -31,7 +35,7 @@ public class CompaniesBusinessRules {
     }
 
 
-    public Result emailCanNotBeDublicated(String email) {
+    public Result emailCanNotBeDuplicated(String email) {
         if (!userDao.existsByEmail(email))
             return new SuccessResult();
         return new ErrorResult("Email already exists!");

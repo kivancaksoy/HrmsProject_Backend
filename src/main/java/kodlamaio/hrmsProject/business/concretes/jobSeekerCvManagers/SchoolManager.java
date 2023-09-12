@@ -20,7 +20,6 @@ public class SchoolManager implements SchoolService {
     private final SchoolDao schoolDao;
     private final ModelMapperService modelMapperService;
 
-    @Autowired
     public SchoolManager(SchoolDao schoolDao, ModelMapperService modelMapperService) {
         this.schoolDao = schoolDao;
         this.modelMapperService = modelMapperService;

@@ -8,17 +8,22 @@ import kodlamaio.hrmsProject.core.utilities.results.SuccessResult;
 import kodlamaio.hrmsProject.dataAccess.abstracts.verificationDaos.EmailVerificationCodeDao;
 import kodlamaio.hrmsProject.dataAccess.abstracts.JobSeekerDao;
 import kodlamaio.hrmsProject.dataAccess.abstracts.UserDao;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
 public class JobSeekerBusinessRules {
 
-    private JobSeekerDao jobSeekerDao;
-    private UserDao userDao;
-    private EmailVerificationCodeDao emailVerificationCodeDao;
-    private PersonValidationService personValidationService;
+    private final JobSeekerDao jobSeekerDao;
+    private final UserDao userDao;
+    private final EmailVerificationCodeDao emailVerificationCodeDao;
+    private final PersonValidationService personValidationService;
+
+    public JobSeekerBusinessRules(JobSeekerDao jobSeekerDao, UserDao userDao, EmailVerificationCodeDao emailVerificationCodeDao, PersonValidationService personValidationService) {
+        this.jobSeekerDao = jobSeekerDao;
+        this.userDao = userDao;
+        this.emailVerificationCodeDao = emailVerificationCodeDao;
+        this.personValidationService = personValidationService;
+    }
 
 
     public Result isPersonVerified(CreateJobSeekerRequest createJobSeekerRequest) {
@@ -29,13 +34,13 @@ public class JobSeekerBusinessRules {
         return new ErrorResult("Mernis validation error!");
     }
 
-    public Result emailCanNotBeDublicated(String email) {
+    public Result emailCanNotBeDuplicated(String email) {
         if (!userDao.existsByEmail(email))
             return new SuccessResult();
         return new ErrorResult("Email already exists!");
     }
 
-    public Result tcknCanNotBeDublicated(String tckn) {
+    public Result CanCanCanNotBeDuplicated(String tckn) {
         if (!jobSeekerDao.existsByTckn(tckn))
             return new SuccessResult();
         return new ErrorResult("TCKN already exists!");

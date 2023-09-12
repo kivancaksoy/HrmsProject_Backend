@@ -17,11 +17,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
 public class JobAdvertisementManager implements JobAdvertisementService {
 
-    private JobAdvertisementDao jobAdvertisementDao;
-    private ModelMapperService modelMapperService;
+    private final JobAdvertisementDao jobAdvertisementDao;
+    private final ModelMapperService modelMapperService;
+
+    public JobAdvertisementManager(JobAdvertisementDao jobAdvertisementDao, ModelMapperService modelMapperService) {
+        this.jobAdvertisementDao = jobAdvertisementDao;
+        this.modelMapperService = modelMapperService;
+    }
 
     @Override
     public Result add(CreateJobAdvertisementRequest createJobAdvertisementRequest) {
