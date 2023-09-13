@@ -21,7 +21,7 @@ import java.util.List;
 @Service
 public class JobSeekerImageManager implements JobSeekerImageService {
     private final JobSeekerImageDao jobSeekerImageDao;
-    private final JobSeekerDao jobSeekerDao;
+    private final JobSeekerDao jobSeekerDao; //Todo Bunun yerine JobSeekerService'i kullanmak faced yaklaşımına uygun olur.
     private final FileService fileService;
     private final ModelMapperService modelMapperService;
 

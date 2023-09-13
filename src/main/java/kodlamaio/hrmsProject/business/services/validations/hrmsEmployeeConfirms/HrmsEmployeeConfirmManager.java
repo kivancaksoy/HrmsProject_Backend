@@ -19,10 +19,10 @@ import java.util.List;
 @Service
 public class HrmsEmployeeConfirmManager implements HrmsEmployeeConfirmService {
     private final HrmsEmployeeConfirmCompanyDao hrmsEmployeeConfirmCompanyDao;
-    private final CompanyDao companyDao;
-    private final HrmsEmployeeDao hrmsEmployeeDao;
-    private final JobAdvertisementDao jobAdvertisementDao;
-    private final HrmsEmployeeConfirmJobAdvertisementDao hrmsEmployeeConfirmJobAdvertisementDao;
+    private final CompanyDao companyDao; //Todo Bunun yerine CompanyService'i kullanmak faced yaklaşımına uygun olur.
+    private final HrmsEmployeeDao hrmsEmployeeDao; //Todo Bunun yerine HrmsEmployeeService'i kullanmak faced yaklaşımına uygun olur.
+    private final JobAdvertisementDao jobAdvertisementDao; //Todo Bunun yerine JobAdvertisementService'i kullanmak faced yaklaşımına uygun olur.
+    private final HrmsEmployeeConfirmJobAdvertisementDao hrmsEmployeeConfirmJobAdvertisementDao; //Todo Bunun yerine HrmsEmployeeConfirmJobAdvertisementService'i kullanmak faced yaklaşımına uygun olur.
 
     public HrmsEmployeeConfirmManager(HrmsEmployeeConfirmCompanyDao hrmsEmployeeConfirmCompanyDao, CompanyDao companyDao, HrmsEmployeeDao hrmsEmployeeDao, JobAdvertisementDao jobAdvertisementDao, HrmsEmployeeConfirmJobAdvertisementDao hrmsEmployeeConfirmJobAdvertisementDao) {
         this.hrmsEmployeeConfirmCompanyDao = hrmsEmployeeConfirmCompanyDao;

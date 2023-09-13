@@ -12,14 +12,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class CompaniesBusinessRules {
 
-    private final CompanyDao companyDao;
     private final UserDao userDao;
-    private final EmailVerificationCodeDao emailVerificationCodeDao;
 
-    public CompaniesBusinessRules(CompanyDao companyDao, UserDao userDao, EmailVerificationCodeDao emailVerificationCodeDao) {
-        this.companyDao = companyDao;
+    public CompaniesBusinessRules(UserDao userDao) {
         this.userDao = userDao;
-        this.emailVerificationCodeDao = emailVerificationCodeDao;
     }
 
     public Result isEmailAndWebSiteOnTheSameDomain(CreateCompanyRequest createCompanyRequest) {

@@ -15,13 +15,11 @@ public class JobSeekerBusinessRules {
 
     private final JobSeekerDao jobSeekerDao;
     private final UserDao userDao;
-    private final EmailVerificationCodeDao emailVerificationCodeDao;
     private final PersonValidationService personValidationService;
 
-    public JobSeekerBusinessRules(JobSeekerDao jobSeekerDao, UserDao userDao, EmailVerificationCodeDao emailVerificationCodeDao, PersonValidationService personValidationService) {
+    public JobSeekerBusinessRules(JobSeekerDao jobSeekerDao, UserDao userDao, PersonValidationService personValidationService) {
         this.jobSeekerDao = jobSeekerDao;
         this.userDao = userDao;
-        this.emailVerificationCodeDao = emailVerificationCodeDao;
         this.personValidationService = personValidationService;
     }
 
